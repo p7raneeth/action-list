@@ -4,7 +4,7 @@ __pycache__/
 *.pyd
 .env
 .venv/
-venv/
+app-env/
 .DS_Store
 *.db
 *.sqlite3
