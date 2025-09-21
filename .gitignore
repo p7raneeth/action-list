@@ -8,4 +8,8 @@ app-env/
 .DS_Store
 *.db
 *.sqlite3
+<<<<<<< HEAD
 .gitignore
+=======
+.gitignore
+>>>>>>> development
