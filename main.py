@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import tasks
+from app.routers import tasks, user
 
 # Create FastAPI app
 app = FastAPI(
@@ -10,6 +10,8 @@ app = FastAPI(
 
 # Include the tasks router
 app.include_router(tasks.router, prefix="/api/v1")
+app.include_router(user.router, prefix="/api/v1")
+
 
 # Root endpoint
 @app.get("/")

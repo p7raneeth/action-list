@@ -9,4 +9,4 @@ class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True)
-    password_hashed = Column(String)
+    password = Column(String, unique=True)
