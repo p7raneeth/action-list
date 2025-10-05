@@ -1,5 +1,16 @@
-from fastapi import FastAPI
-from app.routers import tasks
+from fastapi import FastAPI, APIRouter, Depends, HTTPException, status
+from typing import Annotated
+from sqlalchemy.orm import Session
+from app.database import get_db
+from app.routers.auth import get_current_user
+from app.models import Base, User, Task  # Import all models together
+from app.database import engine
+
+# Create tables
+Base.metadata.create_all(bind=engine)
+
+from app.routers import tasks, user, auth
+
 
 # Create FastAPI app
 app = FastAPI(
@@ -10,6 +21,8 @@ app = FastAPI(
 
 # Include the tasks router
 app.include_router(tasks.router, prefix="/api/v1")
+app.include_router(user.router, prefix="/api/v1")
+app.include_router(auth.router, prefix="/api/v1")
 
 # Root endpoint
 @app.get("/")
