@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: to-do-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mYsecurEpassworD
+      POSTGRES_DB: alembic_db2
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: to-do-api
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:mYsecurEpassworD@db:5432/alembic_db2
+
+volumes:
+  postgres_data:
